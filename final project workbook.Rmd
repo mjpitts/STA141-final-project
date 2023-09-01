@@ -1,0 +1,56 @@
+---
+title: "Housing Research"
+author: "Michael Pitts"
+date: "8/17/2023"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+  library(tidyverse)
+```
+
+
+## Target question:
+The goal of this report is to identify and possibly rank contributing factors to large national increases in average home prices. Additionally policy suggestions will be made in accordance to this finding in the conclusion section.
+
+### Step 1: Import data
+
+### Response Variable:
+
+Change in Median home price.
+
+### Predictor Variables:
+
+\begin{enumerate} \item Inflation. \item Average 30 year mortgage rate. \item National unemployment rate \item National housing inventory \item United States building permits \end{enumerate}
+
+TODO: Data cleaning, Inflation uses year per row, mhp uses quarter per row, choose one. mort_30 data needs to be thinned to quarter values. mhp will be used to create month over month price differences.
+
+I will use date, Quarter for each dataframe:
+year quarter. ex: 1965 Q1
+    
+```{r echo=T, results='hide'}
+  # Start: Jan 1914, End: Dec 2022, Monthly.
+  # https://www.usinflationcalculator.com/inflation/historical-inflation-rates/
+  natl_infl<- read_csv('US_inflation.csv', show_col_types = FALSE)
+
+  # Start: Jan 1963, End: Apr 2023, Quarterly.
+  # https://fred.stlouisfed.org/series/MSPUS
+  mhp <- read_csv('median_home_price.csv', show_col_types = FALSE)
+  
+  # Start: Apr 1971, End: Aug 2023. Quarterly.
+  # https://fred.stlouisfed.org/series/MORTGAGE30US
+  mort_30 <-  read_csv('mortgage_30.csv', show_col_types = FALSE)
+  
+  # Start: Jan 1950, End: Dec 2022, Monthly.
+  # https://data.bls.gov/pdq/SurveyOutputServlet 
+  unemply <- read_csv("US_unemployment.csv", show_col_types = FALSE)
+  
+  # Start Jan 1963, End: Jun 2023, Monthly.
+  # https://www.huduser.gov/portal/ushmc/hs_exh.html
+  new_houses <- read_csv("new_for_sale.csv", show_col_types = FALSE)
+  
+```
